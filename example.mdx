@@ -1,0 +1,302 @@
+## Python: Remove the first two (or N) characters from String
+
+**Use string slicing to remove the first two characters from a string, e.g.
+`result = my_str[2:]`. The new string will contain a slice of the original
+string with the first two characters removed.**
+
+```python:main.py
+my_str = 'avocado'
+
+result_1 = my_str[2:]
+print(result_1)  # 👉️ 'ocado'
+
+result_2 = my_str.lstrip(my_str[0:2])
+print(result_2)  # 👉️ 'ocado'
+
+result_3 = my_str.lstrip('av')
+print(result_3)  # 👉️ 'ocado'
+
+# ✅ remove the first two words from a string
+my_str_2 = 'one two three four five six'
+
+result_4 = my_str_2.split(' ', 2)[2]
+print(result_4)  # 👉️ 'three four five six'
+```
+
+The first example uses string slicing to remove the first two characters from a
+string.
+
+The syntax for string slicing is `my_str[start:stop:step]`.
+
+<Alert>
+  The <code>start</code> index is inclusive, whereas the <code>stop</code> index
+  is exclusive (up to, but not including).
+</Alert>
+
+Python indexes are zero-based, so the first character in a string has an index
+of `0`, and the last character has an index of `-1` or `len(my_str) - 1`.
+
+The slice `my_str[2:]` starts at the character at index `2` and goes to the end
+of the string.
+
+```python:main.py
+print('hello'[2:])  # 👉️ 'llo'
+
+print('world'[2:])  # 👉️ 'rld'
+
+print('test'[2:])  # 👉️ 'st'
+```
+
+If you use this approach with an empty string, you will get an empty string
+back.
+
+```python:main.py
+print(''[2:]) # 👉️ ''
+```
+
+No error is raised even though the string in the example is empty.
+
+Alternatively, you can use the `str.lstrip()` method.
+
+```python:main.py
+my_str = 'avocado'
+
+result_1 = my_str.lstrip(my_str[0:2])
+print(result_1)  # 👉️ 'ocado'
+
+result_2 = my_str.lstrip('av')
+print(result_2)  # 👉️ 'ocado'
+```
+
+The first example uses a slice of `0:2` to get the first 2 characters of the
+string.
+
+The [str.lstrip](https://docs.python.org/3/library/stdtypes.html#str.lstrip)
+method takes a string containing characters as an argument and returns a copy of
+the string with the specified leading characters removed.
+
+The method does not change the original string, it returns a new string. Strings
+are immutable in Python.
+
+<Alert>
+  Note that the <code>str.lstrip()</code> method doesn't necessarily remove only
+  the first two characters from the string.
+</Alert>
+
+The method removes all occurrences and combinations of the specified characters
+from the start of the string.
+
+Use the `str.split()` method if you need to remove the first two words from a
+string.
+
+```python:main.py
+my_str = 'one two three four five six'
+
+result = my_str.split(' ', 2)[2]
+print(result)  # 👉️ 'three four five six'
+```
+
+We split the string on a space 2 times and returned the third list item.
+
+You can also use the `str.removeprefix()` method to remove the first two
+characters from a string.
+
+```python:main.py
+my_str = 'avocado'
+
+result = my_str.removeprefix(my_str[0:2])
+
+print(result)  # 👉️ 'ocado'
+```
+
+The
+[str.removeprefix](https://docs.python.org/3/library/stdtypes.html#str.removeprefix)
+method checks if the string starts with the specified prefix and if it does, the
+method returns a new string excluding the prefix, otherwise it returns a copy of
+the original string.
+
+The `removeprefix` method can also be used to remove more than `2` characters
+from the start of the string.
+
+You can use the same approach to remove the first N characters from a string.
+
+## Remove the first N characters from a String in Python
+
+**Use string slicing to remove the first N characters from a string, e.g.
+`new_string = string[N:]`. The slice will remove the first N characters from the
+string by returning a copy of the string that starts at the character after the
+first N characters.**
+
+```python:main.py
+string = 'bobbyhadz.com'
+
+# ✅ Remove the first 2 characters from a string
+new_string = string[2:]
+print(new_string)  # 👉️ bbyhadz.com
+
+# ✅ Remove the first 3 characters from a string
+new_string = string[3:]
+print(new_string)  # 👉️ byhadz.com
+
+# ✅ Remove the first 4 characters from a string
+new_string = string[4:]
+print(new_string)  # 👉️ yhadz.com
+```
+
+We used string slicing to remove the first N characters from a string.
+
+The syntax for string slicing is `my_str[start:stop:step]`.
+
+<Alert>
+  The <code>start</code> index is inclusive, whereas the <code>stop</code> index
+  is exclusive (up to, but not including).
+</Alert>
+
+Python indexes are zero-based, so the first character in a string has an index
+of `0`, and the last character has an index of `-1` or `len(my_str) - 1`.
+
+The slice `string[2:]` starts at index `2` and goes to the end of the string.
+
+```python:main.py
+string = 'bobbyhadz.com'
+
+new_string = string[2:]
+print(new_string)  # 👉️ bbyhadz.com
+```
+
+In other words, the slice removes the first 2 characters of the string (indices
+`0` and `1`).
+
+If you don't need to keep the original variable around, reassign it rather than
+declaring a new variable.
+
+```python:main.py
+string = 'bobbyhadz.com'
+
+string = string[3:]
+print(string)  # 👉️ byhadz.com
+```
+
+The slice `string[3:]` starts at index `3` and goes to the end of the string.
+
+In other words, it removes the first 3 characters from the string (indices `0`,
+`1` and `2`).
+
+
+The
+[str.startswith](https://docs.python.org/3/library/stdtypes.html#str.startswith)
+method returns `True` if the string starts with the provided prefix, otherwise
+the method returns `False`.
+
+You can also use string slicing if you need to get the two parts of the string.
+
+```python:main.py
+string = 'bobbyhadz.com'
+
+n = 3
+
+before, after = string[:n], string[n:]
+
+print(before)  # 👉️ bob
+print(after)  # 👉️ byhadz.com
+```
+
+The slice `string[:3]` starts at index `0` and goes up to, but not including
+index `3`.
+
+In other words, it returns the first 3 characters in the string (indices `0`,
+`1` and `2`).
+
+The slice `string[3:]` starts at index `3` and goes to the end of the string.
+
+Alternatively, you can use the `str.replace()` method.
+
+## Remove the first N characters from a String using str.replace()
+
+**To remove the first N characters from a string:**
+
+1. Use string slicing to get the first N characters of the string.
+2. Use the `str.replace()` method to remove the first N characters from the
+   string.
+3. Remove the characters by replacing them with an empty string.
+
+```python:main.py
+string = 'bobbyhadz.com'
+
+n = 2
+
+new_string = string.replace(string[:n], '', 1)
+print(new_string)  # 👉️ bbyhadz.com
+```
+
+We used the `str.replace()` method to remove the first N characters from a
+string by replacing them with an empty string.
+
+<Alert>
+  By default, the <code>str.replace()</code> method replaces all occurrences of
+  the provided substring in the string, so we specified a count of{' '}
+  <code>1</code> to make sure we only replace the first occurrence.
+</Alert>
+
+The [str.replace](https://docs.python.org/3/library/stdtypes.html#str.replace)
+method returns a copy of the string with all occurrences of a substring replaced
+by the provided replacement.
+
+The method takes the following parameters:
+
+| Name  | Description                                                |
+| ----- | ---------------------------------------------------------- |
+| old   | The substring we want to replace in the string             |
+| new   | The replacement for each occurrence of `old`               |
+| count | Only the first `count` occurrences are replaced (optional) |
+
+The method doesn't change the original string. Strings are immutable in Python.
+
+Alternatively, you can use a `for` loop.
+
+## Remove the first N characters from a String using a for loop
+
+**To remove the first N characters from a string:**
+
+1. Use a `for` loop to iterate over the string with `enumerate()`.
+2. Check if the index is greater than or equal to N.
+3. If the condition is met, append the current character to a new string.
+
+```python:main.py
+string = 'bobbyhadz.com'
+
+new_string = ''
+
+n = 3
+
+for index, char in enumerate(string):
+    if index >= n:
+        new_string += char
+
+print(new_string)  # 👉️ 'byhadz.com'
+```
+
+We used the `enumerate()` function to get access to the index of the current
+iteration.
+
+```python:main.py
+string = 'abc'
+
+for index, char in enumerate(string):
+    print(char, index)  # 👉️ a 0, b 1, c 2
+```
+
+The [enumerate](https://docs.python.org/3/library/functions.html#enumerate)
+function takes an iterable and returns an enumerate object containing tuples
+where the first element is the index and the second is the corresponding item.
+
+On each iteration, we check if the current index is greater than or equal to N.
+
+If the condition is met, we add the current character to a new string.
+
+The `+=` operator is a shorthand for `new_string = new_string + char`.
+
+Note that this approach is much slower than the previous two.
+
+Which approach you pick is a matter of personal preference. I'd use string
+slicing as I find it quite direct and intuitive.
